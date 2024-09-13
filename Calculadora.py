@@ -8,6 +8,17 @@ def buttonInput(button_name):
     new_text = current_text + button_name
     display_var.set(new_text)
 
+def clean():
+    display_var.set("")
+
+def calculator():
+    try:
+        result = eval(display_var.get())
+        display_var.set(str(result))
+    except:
+        display_var.set("Error")
+
+
 #window 
 root = Tk()
 root.title("Calculator")
@@ -38,11 +49,16 @@ buttons = [
     ('7', 1, 0),  ('8', 1, 1),  ('9', 1, 2), ('/', 1, 3),
      ('4', 2, 0), ('5', 2, 1), ('6', 2, 2), ('*', 2, 3),
      ('1', 3, 0), ('2', 3, 1), ('3', 3, 2), ('-', 3, 3),
-    (',',4, 0), ('0', 4, 1), ('+', 4, 2), ('=', 4, 3)   
+    (',',4, 0), ('0', 4, 1), ('+', 4, 2), ('=', 4, 3), ('Del', 4, 4)   
 ]
 
 for (text, row, coll) in buttons:
-    button = tk.Button(root, text=text, padx=10, pady=10, command= lambda t=text: buttonInput(t))
+    if text == '=' :
+        button = tk.Button(root, text=text, padx=10, pady=10, command=calculator)
+    elif text == 'Del':
+        button = tk.Button(root, text=text, padx=10, pady=10, command=clean)
+    else:
+        button = tk.Button(root, text=text, padx=10, pady=10, command= lambda t=text: buttonInput(t))
     button.grid(row=row, column=coll, sticky="nsew")
 
 
