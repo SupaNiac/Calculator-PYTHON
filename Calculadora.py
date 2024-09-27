@@ -9,15 +9,15 @@ color1 = "#202020" #black
 color2 = "#ffffff" #white
 color3 = "#323232" #dark grey
 color4 = "#3c3c3c" #dark grey2
-color5 = "#4cc2ff" #blue
-color6 = "#47b1e8" #blue2
+color5 = "#006e7f" #blue
+color6 = "#128c9f" #blue2
 color7 = "#000000" #black2
-color8 = "#ffc900" #yellow 
-color9 = "#ffdc00" #yellow2
-color10= "#f10000" #red 
-color11= "#f91c1c" #red2
-color12= "#44d81f" #green 
-color13= "#4ceb25" #green2
+color8 = "#f8bc2e" #yellow 
+color9 = "#f8c449" #yellow2
+color10= "#b22727" #red 
+color11= "#c83a3a" #red2
+color12= "#21bd14" #green 
+color13= "#2ad41c" #green2
 
 #window
 window = Tk()
@@ -37,9 +37,17 @@ def inputValue(event):
 
 def calculate():
     global values
-    result = eval(values)
-    showValue.set(str(result))
-    values = str(result)
+    try:
+       
+        result = eval(values)
+        showValue.set(str(result))
+        values = str(result)  
+    except ZeroDivisionError:
+        showValue.set("Undefined result")  
+        values = ""  
+    except Exception as e:
+        showValue.set("Error")  
+        values = ""  
 
 def clean():
     global values
@@ -116,7 +124,7 @@ btn13.place(x=161, y=147)
 btn14 = Button(frameKeyboard, command= lambda: inputValue('+'), text='+', width=8, height=2, bg=color8, fg=color2, font=("ivy 11 bold"), relief="flat", overrelief="raised", activebackground=color9, activeforeground=color7, highlightthickness=0, borderwidth=0 )
 btn14.place(x=241, y=147)
 
-btn15 = Button(frameKeyboard, command= lambda: inputValue('0'), text='0', width=17, height=2, bg=color12, fg=color2, font=("ivy 11 bold"), relief="flat", overrelief="raised", activebackground=color13, activeforeground=color2, highlightthickness=0, borderwidth=0 )
+btn15 = Button(frameKeyboard, command= lambda: inputValue('0'), text='0', width=17, height=2, bg=color12, fg=color2, font=("ivy 11 bold"), relief="flat", overrelief="raised", activebackground=color13, activeforeground=color7, highlightthickness=0, borderwidth=0 )
 btn15.place(x=0, y=195)
 
 btn16 = Button(frameKeyboard, command= lambda: inputValue('.'), text='.', width=8, height=2, bg=color3, fg=color2, font=("ivy 11 bold"), relief="flat", overrelief="raised", activebackground=color4, activeforeground=color2, highlightthickness=0, borderwidth=0 )
@@ -127,6 +135,3 @@ btn17.place(x=241, y=195)
 
 
 window.mainloop()
-
-
-
